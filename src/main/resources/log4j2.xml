@@ -15,31 +15,25 @@
                      filePattern="${LOG_DIR}/${date:yyyy-MM-dd}/%d{yyyy-MM-dd_HH-mm}_%i.log">
             <PatternLayout pattern="${pattern_file}"/>
             <Policies>
-                <SizeBasedTriggeringPolicy size="1KB"/>
+                <SizeBasedTriggeringPolicy size="1MB"/>
             </Policies>
             <DefaultRolloverStrategy max="10"/>
         </RollingFile>
     </Appenders>
 
     <Loggers>
-        <Logger name="Log_Console" level="debug" additivity="true">
-<!--            <Filters>-->
-<!--                <CoinNewFilter threshold="1000" onMatch="ACCEPT" onMismatch="DENY"/>-->
-<!--            </Filters>-->
+        <Logger name="com.zhukovskiy.task1" level="debug" additivity="false">
+            <!--            <Filters>-->
+            <!--                <CoinNewFilter threshold="1000" onMatch="ACCEPT" onMismatch="DENY"/>-->
+            <!--            </Filters>-->
             <AppenderRef ref="Console"/>
-        </Logger>
-
-        <Logger name="Rolling_File" level="debug" additivity="false">
             <AppenderRef ref="FileRolling"/>
         </Logger>
 
         <!-- Root Logger -->
-        <Root level="all">
+        <Root level="INFO">
             <AppenderRef ref="FileRolling"/>
             <AppenderRef ref="Console"/>
-            <Filters>
-                <CoinNewFilter threshold="1000" onMatch="ACCEPT" onMismatch="DENY"/>
-            </Filters>
         </Root>
     </Loggers>
 </Configuration>
