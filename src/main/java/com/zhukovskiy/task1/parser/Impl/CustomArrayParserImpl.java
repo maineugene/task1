@@ -41,18 +41,17 @@ public class CustomArrayParserImpl implements CustomArrayParser {
 
     public double[] parseStringToDoubleArray(String line) throws CustomArrayException {
         logger.debug("Parsing line: {}", line);
-        String[] parts = line.split("[,;\\-\\s]+");
-
-        List<String> numbersStrings = new ArrayList<>();
+        String[] parts = line.split("[,;\\-/\\s]+");
+        List<String> numberStrings = new ArrayList<>();
         for (String part : parts) {
             String stripped = part.strip();
             if (!stripped.isBlank()) {
-                numbersStrings.add(stripped);
+                numberStrings.add(stripped);
             }
         }
 
-        double[] result = new double[numbersStrings.size()];
-        for (int i = 0; i < numbersStrings.size(); ++i) {
+        double[] result = new double[numberStrings.size()];
+        for (int i = 0; i < numberStrings.size(); ++i) {
             try {
                 result[i] = Double.parseDouble(numberStrings.get(i));
             } catch (NumberFormatException e) {

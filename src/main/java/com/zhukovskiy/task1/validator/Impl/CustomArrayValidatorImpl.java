@@ -12,8 +12,7 @@ import java.nio.file.Paths;
 
 public class CustomArrayValidatorImpl implements CustomArrayValidator {
     private static final Logger logger = LogManager.getLogger();
-    private static final String Line_REGEX =
-            "^[-+]?\\d+(\\.\\d+)?([,;\\-][-+]?\\d+(\\.\\d+)?)*$";
+    private static final String Line_REGEX = "^[\\d\\s.,;+\\-]*$";
 
     public boolean isValidFile(String filePath) throws CustomArrayException {
         logger.debug("Validating file: {}", filePath);
