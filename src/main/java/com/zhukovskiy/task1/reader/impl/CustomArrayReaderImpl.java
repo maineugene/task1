@@ -1,7 +1,6 @@
-package com.zhukovskiy.task1.reader.Impl;
+package com.zhukovskiy.task1.reader.impl;
 
 import com.zhukovskiy.task1.exception.CustomArrayException;
-import com.zhukovskiy.task1.parser.CustomArrayParser;
 import com.zhukovskiy.task1.reader.CustomArrayReader;
 import com.zhukovskiy.task1.validator.CustomArrayValidator;
 import org.apache.logging.log4j.LogManager;
