@@ -3,6 +3,7 @@ package com.zhukovskiy.task1.reader.impl;
 import com.zhukovskiy.task1.exception.CustomArrayException;
 import com.zhukovskiy.task1.reader.CustomArrayReader;
 import com.zhukovskiy.task1.validator.CustomArrayValidator;
+import com.zhukovskiy.task1.validator.impl.CustomArrayValidatorImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,15 +15,11 @@ import java.util.List;
 
 public class CustomArrayReaderImpl implements CustomArrayReader {
     private static final Logger logger = LogManager.getLogger();
-    private final CustomArrayValidator validator;
-
-    public CustomArrayReaderImpl(CustomArrayValidator validator) {
-        this.validator = validator;
-    }
 
     @Override
     public String[] readAllLinesFromFile(String filePath) throws CustomArrayException {
         logger.debug("Reading all lines from file: {}", filePath);
+        CustomArrayValidator validator = new CustomArrayValidatorImpl();
 
         Path path = Paths.get(filePath);
 

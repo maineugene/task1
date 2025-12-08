@@ -6,5 +6,5 @@ import com.zhukovskiy.task1.factory.CustomArrayFactory;
 import com.zhukovskiy.task1.validator.CustomArrayValidator;
 
 public interface CustomArrayParser {
-    public double[] parseLineToDoubleArray(String line) throws CustomArrayException;
+    double[] parseLineToDoubleArray(String line) throws CustomArrayException;
 }

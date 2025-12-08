@@ -5,6 +5,7 @@ import com.zhukovskiy.task1.exception.CustomArrayException;
 import com.zhukovskiy.task1.factory.CustomArrayFactory;
 import com.zhukovskiy.task1.parser.CustomArrayParser;
 import com.zhukovskiy.task1.validator.CustomArrayValidator;
+import com.zhukovskiy.task1.validator.impl.CustomArrayValidatorImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,16 +15,12 @@ import java.util.List;
 
 public class CustomArrayParserImpl implements CustomArrayParser {
     private static final Logger logger = LogManager.getLogger();
-    private final CustomArrayValidator validator;
     private static final String SEPARATOR_REGEX = "[,;\\-/\\s]+";
-
-    public CustomArrayParserImpl(CustomArrayValidator validator) {
-        this.validator = validator;
-    }
 
     @Override
     public double[] parseLineToDoubleArray(String line) throws CustomArrayException {
         logger.debug("Parsing CustomArray line: {}", line);
+        CustomArrayValidator validator = new CustomArrayValidatorImpl();
 
         if (!validator.isValidCustomArrayLine(line)) {
             throw new CustomArrayException("Invalid array line format: " + line);

@@ -4,5 +4,5 @@ import com.zhukovskiy.task1.exception.CustomArrayException;
 import com.zhukovskiy.task1.validator.CustomArrayValidator;
 
 public interface CustomArrayReader {
-    public String[] readAllLinesFromFile(String filepath) throws CustomArrayException;
+    String[] readAllLinesFromFile(String filepath) throws CustomArrayException;
 }

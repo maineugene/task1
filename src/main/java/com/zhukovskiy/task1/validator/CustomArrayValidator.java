@@ -4,7 +4,7 @@ import com.zhukovskiy.task1.exception.CustomArrayException;
 import org.apache.logging.log4j.LogManager;
 
 public interface CustomArrayValidator {
-    public boolean isValidFile(String filepath);
+    boolean isValidFile(String filepath);
 
-    public boolean isValidCustomArrayLine(String line);
+    boolean isValidCustomArrayLine(String line);
 }
