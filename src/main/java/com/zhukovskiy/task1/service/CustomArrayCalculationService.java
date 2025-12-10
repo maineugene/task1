@@ -5,4 +5,8 @@ import com.zhukovskiy.task1.exception.CustomArrayException;
 
 public interface CustomArrayCalculationService {
     double calculateSum(CustomArray array) throws CustomArrayException;
+
+    double findMin(CustomArray array) throws CustomArrayException;
+
+    double findMax(CustomArray array) throws CustomArrayException;
 }

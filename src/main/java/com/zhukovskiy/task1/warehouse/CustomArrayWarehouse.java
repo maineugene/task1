@@ -1,13 +1,54 @@
 package com.zhukovskiy.task1.warehouse;
 
 import com.zhukovskiy.task1.entity.CustomArray;
+import com.zhukovskiy.task1.entity.CustomArrayData;
+import com.zhukovskiy.task1.exception.CustomArrayException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-public interface CustomArrayWarehouse {
-    static CustomArrayWarehouse getInstance();
+import java.util.HashMap;
+import java.util.Map;
 
-    boolean containsId(long id);
+public class CustomArrayWarehouse {
+    private static final Logger logger = LogManager.getLogger();
+    private static CustomArrayWarehouse instance;
+    private final Map<Long, CustomArrayData> storage;
 
-    void add(CustomArray array);
+    private CustomArrayWarehouse() {
+        storage = new HashMap<>();
+    }
 
-    void remove(long id);
+    public static CustomArrayWarehouse getInstance() {
+        if (instance == null) {
+            instance = new CustomArrayWarehouse();
+        }
+        return instance;
+    }
+
+    public boolean containsId(long id) {
+        return storage.containsKey(id);
+    }
+
+    public CustomArrayData get(long id) {
+        return storage.get(id);
+    }
+
+    public void put(Long id, CustomArrayData arrayData) throws CustomArrayException {
+        if (arrayData == null) {
+            throw new CustomArrayException("Cannot add null array");
+        }
+
+        if (storage.containsKey(id)) {
+            throw new CustomArrayException("Array with id " + id + " already exists");
+        }
+
+        storage.put(id, arrayData);
+    }
+
+    public void remove(long id) {
+        if(!containsId(id)){
+            logger.warn("Attempt to delete non-existent Id");
+        }
+        storage.remove(id);
+    }
 }

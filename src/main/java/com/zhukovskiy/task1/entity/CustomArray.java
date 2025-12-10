@@ -7,8 +7,8 @@ import java.util.StringJoiner;
 
 public class CustomArray {
 
-    private double[] array;
     private final long id;
+    private double[] array;
 
     public CustomArray(final int size, final long id) throws CustomArrayException {
         if (size < 0) {
