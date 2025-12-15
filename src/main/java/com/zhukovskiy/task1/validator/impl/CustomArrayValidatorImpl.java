@@ -11,39 +11,18 @@ import java.nio.file.Paths;
 
 public class CustomArrayValidatorImpl implements CustomArrayValidator {
     private static final Logger logger = LogManager.getLogger();
-    private static final String Line_REGEX = "^[\\d\\s.,;+\\-]*$";
-
-    public boolean isValidFile(String filePath) {
-        logger.debug("Validating file: {}", filePath);
-
-        Path path = Paths.get(filePath);
-
-        if (filePath.isBlank() || !Files.exists(path) || !Files.isReadable(path)) {
-            logger.error("File cannot be read: {}", filePath);
-            return false;
-        }
-
-        logger.info("File validation passed: {}", filePath);
-        return true;
-    }
+    private static final String LINE_REGEX = "^[\\d\\s.,;+\\-]*$";
 
     public boolean isValidCustomArrayLine(String line) {
-        String stripped_line = line.strip();
+        String strippedLine = line.strip();
 
-        if (stripped_line.isBlank()) {
+        if (strippedLine.isBlank()) {
             return true;
         }
 
-        boolean isValid = stripped_line.matches(Line_REGEX);
-
-        if (isValid) {
-            logger.info("Line {} is valid", line);
-        } else {
-            logger.info("Line {} is not valid", line);
-        }
+        boolean isValid = strippedLine.matches(LINE_REGEX);
+        logger.debug("Line {} is {}", line, isValid ? "valid" : "invalid");
 
         return isValid;
     }
-
-
 }

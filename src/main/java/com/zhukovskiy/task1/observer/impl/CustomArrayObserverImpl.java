@@ -14,17 +14,19 @@ public class CustomArrayObserverImpl implements CustomArrayObserver {
     private static final Logger logger = LogManager.getLogger();
 
     @Override
-    public void updateWarehouseData(CustomArray array) throws CustomArrayException {
+    public void updateWarehouseData(CustomArray array) {
         CustomArrayCalculationService calculationService = new CustomArrayCalculationServiceImpl();
+        try {
+            double min = calculationService.findMin(array);
+            double max = calculationService.findMax(array);
+            double sum = calculationService.calculateSum(array);
 
-        double min = calculationService.findMin(array);
-        double max = calculationService.findMax(array);
-        double sum = calculationService.calculateSum(array);
-
-        CustomArrayData data = new CustomArrayData(min, max, sum);
-        CustomArrayWarehouse warehouse = CustomArrayWarehouse.getInstance();
-        warehouse.put(array.getId(), data);
-
+            CustomArrayData data = new CustomArrayData(min, max, sum);
+            CustomArrayWarehouse warehouse = CustomArrayWarehouse.getInstance();
+            warehouse.put(array.getId(), data);
+        } catch (CustomArrayException e) {
+            logger.error("failed to update warehouse data ");
+        }
         logger.info("Updated arrayData: {} ", array);
     }
 }

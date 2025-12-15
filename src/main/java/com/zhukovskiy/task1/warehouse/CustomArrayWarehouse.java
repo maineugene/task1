@@ -1,6 +1,5 @@
 package com.zhukovskiy.task1.warehouse;
 
-import com.zhukovskiy.task1.entity.CustomArray;
 import com.zhukovskiy.task1.entity.CustomArrayData;
 import com.zhukovskiy.task1.exception.CustomArrayException;
 import org.apache.logging.log4j.LogManager;
@@ -36,10 +35,6 @@ public class CustomArrayWarehouse {
     public void put(Long id, CustomArrayData arrayData) throws CustomArrayException {
         if (arrayData == null) {
             throw new CustomArrayException("Cannot add null array");
-        }
-
-        if (storage.containsKey(id)) {
-            throw new CustomArrayException("Array with id " + id + " already exists");
         }
 
         storage.put(id, arrayData);

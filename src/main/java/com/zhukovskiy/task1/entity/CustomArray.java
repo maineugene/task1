@@ -1,14 +1,19 @@
 package com.zhukovskiy.task1.entity;
 
 import com.zhukovskiy.task1.exception.CustomArrayException;
+import com.zhukovskiy.task1.observer.CustomArrayObservable;
+import com.zhukovskiy.task1.observer.CustomArrayObserver;
+import com.zhukovskiy.task1.observer.impl.CustomArrayObserverImpl;
 
 import java.util.Arrays;
 import java.util.StringJoiner;
 
-public class CustomArray {
+public class CustomArray implements CustomArrayObservable{
 
     private final long id;
     private double[] array;
+
+    private CustomArrayObserver observer;
 
     public CustomArray(final int size, final long id) throws CustomArrayException {
         if (size < 0) {
@@ -65,6 +70,7 @@ public class CustomArray {
 
     public void setArray(double[] array) {
         this.array = Arrays.copyOf(array, array.length);
+        notifyObserver();
     }
 
     public void setValueByIndex(final int index, final double value) throws CustomArrayException {
@@ -72,6 +78,7 @@ public class CustomArray {
             throw new CustomArrayException("Index " + index + " out of bounds for size " + array.length);
         }
         array[index] = value;
+        notifyObserver();
     }
 
     public int length() {
@@ -102,5 +109,24 @@ public class CustomArray {
         return new StringJoiner(", ", CustomArray.class.getSimpleName() + "[", "]")
                 .add("array=" + Arrays.toString(array))
                 .toString();
+    }
+
+    @Override
+    public void addObserver(CustomArrayObserver observer) {
+        this.observer = observer;
+    }
+
+    @Override
+    public void removeObserver(CustomArrayObserver observer) {
+        if (this.observer == observer) {
+            this.observer = null;
+        }
+    }
+
+    @Override
+    public void notifyObserver() {
+        if (observer != null) {
+            observer.updateWarehouseData(this);
+        }
     }
 }
